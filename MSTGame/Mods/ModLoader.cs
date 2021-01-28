@@ -134,6 +134,9 @@ namespace MSTGame.Mods
             {
                 Log.Info($"Loaded mod blocklist: {string.Join(", ", blacklistedMods)}");
             }
+
+            stream.Close();
+            stream.Dispose();
         }
 
         /// <summary>
