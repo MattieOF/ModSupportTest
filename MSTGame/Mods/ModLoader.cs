@@ -34,38 +34,6 @@ namespace MSTGame.Mods
             return assemblies;
         }
 
-        public static void LoadModBlacklist(string path = "mods/blocklist.txt")
-        {
-            if (!File.Exists(path))
-            {
-                File.CreateText(path).Close();
-                return;
-            }
-
-            StreamReader stream = File.OpenText(path);
-            string line;
-            while ((line = stream.ReadLine()) != null)
-            {
-                blacklistedMods.Add(line);
-            }
-
-            if (blacklistedMods.Count != 0)
-            {
-                Log.Info($"Loaded mod blacklist: {string.Join(", ", blacklistedMods)}");
-            }
-        }
-
-        public static void SaveModBlacklist(string path = "mods/blocklist.txt")
-        {
-            StreamWriter writer = File.CreateText(path);
-            foreach (string modName in blacklistedMods)
-                writer.WriteLine(modName);
-
-            writer.Flush();
-            writer.Close();
-            writer.Dispose();
-        }
-
         public static void LoadMods(string modPath = "mods")
         {
             List<string> modNames = new List<string>();
@@ -104,5 +72,58 @@ namespace MSTGame.Mods
             }
             mods.Clear();
         }
+
+        public static void LoadModBlacklist(string path = "mods/blocklist.txt")
+        {
+            if (!File.Exists(path))
+            {
+                File.CreateText(path).Close();
+                return;
+            }
+
+            StreamReader stream = File.OpenText(path);
+            string line;
+            while ((line = stream.ReadLine()) != null)
+            {
+                blacklistedMods.Add(line);
+            }
+
+            if (blacklistedMods.Count != 0)
+            {
+                Log.Info($"Loaded mod blacklist: {string.Join(", ", blacklistedMods)}");
+            }
+        }
+
+        public static void SaveModBlacklist(string path = "mods/blocklist.txt")
+        {
+            StreamWriter writer = File.CreateText(path);
+            foreach (string modName in blacklistedMods)
+                writer.WriteLine(modName);
+
+            writer.Flush();
+            writer.Close();
+            writer.Dispose();
+        }
+
+        public static void AddModToBlacklist(string modName)
+        {
+            blacklistedMods.Add(modName);
+        }
+
+        public static void AddModToBlacklist(IMod mod)
+        {
+            blacklistedMods.Add(mod.ModName);
+        }
+
+        public static void RemoveModFromBlacklist(string modName)
+        {
+            blacklistedMods.Add(modName);
+        }
+
+        public static void RemoveModFromBlacklist(IMod mod)
+        {
+            blacklistedMods.Add(mod.ModName);
+        }
+
     }
 }
