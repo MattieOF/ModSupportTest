@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MSTGame</name>
+    </assembly>
+    <members>
+        <member name="M:MSTGame.Logging.Log.Write(MSTGame.Logging.LogLevel,System.String,System.String,MSTGame.Logging.LogFile)">
+            <summary>
+            Write a message to the log.
+            </summary>
+            <param name="level">The level of log the message is.</param>
+            <param name="message">The message to be written</param>
+            <param name="source">What module the log is coming from. Example: "GAME" or "MODLOADER"</param>
+            <param name="file">The LogFile to write to. If null, it'll be written to the static mainLog</param>
+        </member>
+        <member name="M:MSTGame.Logging.Log.DisposeMainLog">
+            <summary>
+            Dispose the log file. This also flushes the log file.
+            </summary>
+        </member>
+        <member name="M:MSTGame.Logging.LogFile.#ctor(System.String,System.String)">
+            <summary>
+            Create a logfile
+            </summary>
+            <param name="logDir">Directory in which to create the logfile</param>
+            <param name="logFileName">Log file name. If null, it is created as "dd-MM-yy_HH-mm-ss.log"</param>
+        </member>
+        <member name="M:MSTGame.Logging.LogFile.WriteLine(System.String,System.Boolean)">
+            <summary>
+            Write a line to the logfile
+            </summary>
+            <param name="message">Message to write (with a new line character appended)</param>
+            <param name="flush"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MSTGame.Logging.LogFile.DisposeLogFile(System.Boolean)">
+            <summary>
+            Dispose of the log file
+            </summary>
+            <param name="flush">If true, the log file will be flushed before being disposed</param>
+        </member>
+        <member name="M:MSTGame.Logging.LogUtil.SetConsoleColour(MSTGame.Logging.LogLevel)">
+            <summary>
+            Set the console foreground colour depending on the provided log level
+            <list type="table">
+            <item>
+            <term>Trace</term>
+            <description>Grey</description>
+            </item>
+            <item>
+            <term>Info</term>
+            <description>White</description>
+            </item>
+            <item>
+            <term>Warning</term>
+            <description>Yellow</description>
+            </item>
+            <item>
+            <term>Error</term>
+            <description>Red</description>
+            </item>
+            <item>
+            <term>Fatal</term>
+            <description>Dark red</description>
+            </item>
+            </list>
+            </summary>
+            <param name="level"></param>
+        </member>
+        <member name="P:MSTGame.Mods.IMod.ModName">
+            <summary>
+            Name of the mod. Used for mod blocklists, console logging, etc
+            </summary>
+        </member>
+        <member name="M:MSTGame.Mods.IMod.OnEnable">
+            <summary>
+            Called when mods are enabled
+            </summary>
+            <returns>True if the function completed successfully, false if not</returns>
+        </member>
+        <member name="M:MSTGame.Mods.IMod.OnDisable">
+            <summary>
+            Called when mods are disabled
+            </summary>
+            <returns>True if the function completed successfully, false if not</returns>
+        </member>
+        <member name="M:MSTGame.Mods.ModLoader.InitLoaderAndMods(System.String)">
+            <summary>
+            Loads mods, loads the mods blocklist and enables mods (while skipping those in the blocklist)
+            </summary>
+            <param name="modsPath">Path to load mods from</param>
+        </member>
+        <member name="M:MSTGame.Mods.ModLoader.CloseLoaderAndMods">
+            <summary>
+            Disable all mods and save the mod blocklist
+            </summary>
+        </member>
+        <member name="M:MSTGame.Mods.ModLoader.GetValidAssemblies(System.String)">
+            <summary>
+            Check the path given for assembly files with one or more types that implement IMod. These types are also added to the static mods list
+            </summary>
+            <param name="path">The directory to check for mod files</param>
+            <returns>A list containing all assemblies that contain an IMod implementation</returns>
+        </member>
+        <member name="M:MSTGame.Mods.ModLoader.LoadMods(System.String)">
+            <summary>
+            Calls GetValidAssemblies with the provided path and also logs the mod files found
+            </summary>
+            <param name="modPath">Path to look for mods in</param>
+        </member>
+        <member name="M:MSTGame.Mods.ModLoader.EnableMods">
+            <summary>
+            Checks each mod agaisnt the mod blocklist (if found on the blocklist, it is skipped
+            and removed from the static mods list), and each mod has it's OnEnable function called
+            </summary>
+        </member>
+        <member name="M:MSTGame.Mods.ModLoader.DisableMods">
+            <summary>
+            Calls the OnDisable mod on every loaded mod and clears the static mod list
+            </summary>
+        </member>
+        <member name="M:MSTGame.Mods.ModLoader.LoadModBlacklist(System.String)">
+            <summary> 
+            <para>Loads the mod blocklist from the given file and adds all entries to a string list</para>
+            <para>If the blocklist file doesn't exist, it is created</para>
+            </summary>
+            <param name="path">The file path for the blocklist txt</param>
+        </member>
+        <member name="M:MSTGame.Mods.ModLoader.SaveModBlacklist(System.String)">
+            <summary>
+            <para>Saves the blocklist to the given path</para>
+            <para>Format: each line is the modname for a blocklisted mod</para>
+            </summary>
+            <param name="path">Path to save the blocklist to</param>
+        </member>
+        <member name="M:MSTGame.Mods.ModLoader.AddModToBlacklist(MSTGame.Mods.IMod)">
+            <summary>
+            Adds mod.ModName to the mod blocklist
+            </summary>
+            <param name="mod">Mod to add to the blocklist</param>
+        </member>
+    </members>
+</doc>
