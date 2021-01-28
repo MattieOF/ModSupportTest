@@ -34,7 +34,7 @@ namespace MSTGame.Mods
             return assemblies;
         }
 
-        public static void LoadModBlacklist(string path = "mods/blacklist.txt")
+        public static void LoadModBlacklist(string path = "mods/blocklist.txt")
         {
             if (!File.Exists(path))
             {
@@ -55,7 +55,7 @@ namespace MSTGame.Mods
             }
         }
 
-        public static void SaveModBlacklist(string path = "mods/blacklist.txt")
+        public static void SaveModBlacklist(string path = "mods/blocklist.txt")
         {
             StreamWriter writer = File.CreateText(path);
             foreach (string modName in blacklistedMods)
@@ -79,11 +79,20 @@ namespace MSTGame.Mods
 
         public static void EnableMods()
         {
+            List<IMod> modsToRemove = new List<IMod>();
             foreach (IMod mod in mods)
             {
+                if (blacklistedMods.Contains(mod.ModName))
+                {
+                    Log.Info($"Mod with name {mod.ModName} found in mod blocklist, not enabled and removed from mod list.");
+                    modsToRemove.Add(mod);
+                    continue;
+                }
                 mod.OnEnable();
                 // TODO Handle return false (failed init)
             }
+
+            foreach (IMod mod in modsToRemove) mods.Remove(mod);
         }
 
         public static void DisableMods()
