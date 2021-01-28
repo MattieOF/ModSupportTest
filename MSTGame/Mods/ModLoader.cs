@@ -19,21 +19,13 @@ namespace MSTGame.Mods
             foreach (string dir in Directory.GetFiles(path, "*.dll"))
             {
                 Assembly assembly = Assembly.LoadFrom(dir);
-                bool foundModType = false;
                 foreach (Type type in assembly.GetTypes())
                 {
                     if (typeof(IMod).IsAssignableFrom(type))
                     {
-                        if (foundModType)
-                        {
-                            Log.Error($"Mod file {assembly.GetName().Name} has more than one type implementing IMod. Future implementations will be ignored.", "MODLOADER");
-                            continue;
-                        }
-
                         IMod mod = (IMod) Activator.CreateInstance(type);
                         mods.Add(mod);
                         assemblies.Add(assembly);
-                        foundModType = true;
                     }
                 }
             }
