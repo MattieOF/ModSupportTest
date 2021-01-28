@@ -6,20 +6,23 @@ namespace MSTGame.Logging
     {
         public static LogFile mainLog;
 
-        public static void InitLog()
+        public static void InitLog(LogLevel minLogLevel = LogLevel.INFO)
         {
             mainLog = new LogFile();
+            mainLog.minLogLevel = minLogLevel;
         }
 
         /// <summary>
         /// Write a message to the log.
         /// </summary>
-        /// <param name="level">The level of log the message is</param>
+        /// <param name="level">The level of log the message is.</param>
         /// <param name="message">The message to be written</param>
         /// <param name="source">What module the log is coming from. Example: "GAME" or "MODLOADER"</param>
         /// <param name="file">The LogFile to write to. If null, it'll be written to the static mainLog</param>
         public static void Write(LogLevel level, string message, string source = "GAME", LogFile file = null)
         {
+            if (level < ((file != null) ? file : mainLog).minLogLevel) return;
+
             DateTime now = DateTime.Now;
             if (file == null)
             {

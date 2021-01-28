@@ -9,6 +9,7 @@ namespace MSTGame.Mods
     internal class ModLoader
     {
         public static List<IMod> mods = new List<IMod>();
+        public static List<string> blacklistedMods = new List<string>();
 
         public static List<Assembly> GetValidAssemblies(string path)
         {
@@ -31,6 +32,27 @@ namespace MSTGame.Mods
             }
 
             return assemblies;
+        }
+
+        public static void LoadModBlacklist(string path = "mods/blacklist.txt")
+        {
+            if (!File.Exists(path))
+            {
+                File.CreateText(path).Close();
+                return;
+            }
+
+            StreamReader stream = File.OpenText(path);
+            string line;
+            while ((line = stream.ReadLine()) != null)
+            {
+                blacklistedMods.Add(line);
+            }
+
+            if (blacklistedMods.Count != 0)
+            {
+                Log.Info($"Loaded mod blacklist: {string.Join(", ", blacklistedMods)}");
+            }
         }
 
         public static void LoadMods(string modPath = "mods")

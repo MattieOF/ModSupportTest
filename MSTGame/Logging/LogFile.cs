@@ -6,6 +6,7 @@ namespace MSTGame.Logging
     public class LogFile
     {
         private StreamWriter writer;
+        public LogLevel minLogLevel = LogLevel.INFO;
 
         public LogFile(string logDir = "logs", string logFileName = "")
         {
