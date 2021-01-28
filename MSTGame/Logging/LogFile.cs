@@ -12,7 +12,7 @@ namespace MSTGame.Logging
             if (string.IsNullOrWhiteSpace(logFileName))
             {
                 DateTime now = DateTime.Now;
-                logFileName = $"{now.ToString("dd-MM-yy")}_{now.ToString("HH-mm-ss")}";
+                logFileName = $"{now:dd-MM-yy}_{now:HH-mm-ss}";
             }
 
             if (!Directory.Exists(logDir)) Directory.CreateDirectory(logDir);
@@ -29,9 +29,13 @@ namespace MSTGame.Logging
             return true;
         }
 
-        public void DisposeLogFile()
+        /// <summary>
+        /// Dispose of the log file
+        /// </summary>
+        /// <param name="flush">If true, the log file will be flushed before being disposed</param>
+        public void DisposeLogFile(bool flush = true)
         {
-            writer.Flush();
+            if (flush) writer.Flush();
             writer.Dispose();
         }
     }

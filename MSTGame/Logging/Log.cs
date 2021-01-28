@@ -11,15 +11,22 @@ namespace MSTGame.Logging
             mainLog = new LogFile();
         }
 
+        /// <summary>
+        /// Write a message to the log.
+        /// </summary>
+        /// <param name="level">The level of log the message is</param>
+        /// <param name="message">The message to be written</param>
+        /// <param name="source">What module the log is coming from. Example: "GAME" or "MODLOADER"</param>
+        /// <param name="file">The LogFile to write to. If null, it'll be written to the static mainLog</param>
         public static void Write(LogLevel level, string message, string source = "GAME", LogFile file = null)
         {
             DateTime now = DateTime.Now;
             if (file == null)
             {
-                mainLog.WriteLine($"[{now.ToString("HH:mm:ss")} {source} {level}] {message}");
+                mainLog.WriteLine($"[{now:HH:mm:ss.FFFFFFF} {source} {level}] {message}");
             } else
             {
-                file.WriteLine($"[{now.ToShortTimeString()} {source} {level}] {message}");
+                file.WriteLine($"[{now:HH:mm:ss} {source} {level}] {message}");
             }
         }
 
@@ -49,7 +56,7 @@ namespace MSTGame.Logging
         }
 
         /// <summary>
-        /// Dispose the log file. This does not flush the log file.
+        /// Dispose the log file. This also flushes the log file.
         /// </summary>
         public static void DisposeMainLog()
         {

@@ -26,7 +26,7 @@ namespace MSTGame.Mods
                     {
                         if (foundModType)
                         {
-                            Log.Error($"Mod file {assembly.FullName} has more than one type implementing IMod. Future implementations will be ignored.", "MODLOADER");
+                            Log.Error($"Mod file {assembly.GetName().Name} has more than one type implementing IMod. Future implementations will be ignored.", "MODLOADER");
                             continue;
                         }
 
@@ -57,6 +57,7 @@ namespace MSTGame.Mods
             foreach (IMod mod in mods)
             {
                 mod.OnEnable();
+                // TODO Handle return false (failed init)
             }
         }
 
@@ -65,6 +66,7 @@ namespace MSTGame.Mods
             foreach (IMod mod in mods)
             {
                 mod.OnDisable();
+                // TODO Handle return false (failed disable)
             }
             mods.Clear();
         }
