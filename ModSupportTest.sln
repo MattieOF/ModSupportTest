@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSTApp", "MSTApp\MSTApp.csproj", "{7CCDFC1A-147A-4BAD-9FDA-46D0EFBBFE02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSTGame", "MSTGame\MSTGame.csproj", "{3FE54EBF-271A-4A0D-94E5-C9E7A76DB113}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMod", "TestMod\TestMod.csproj", "{3E89E9BF-E15A-4C14-BF52-2CF83CF563E8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7CCDFC1A-147A-4BAD-9FDA-46D0EFBBFE02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CCDFC1A-147A-4BAD-9FDA-46D0EFBBFE02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CCDFC1A-147A-4BAD-9FDA-46D0EFBBFE02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CCDFC1A-147A-4BAD-9FDA-46D0EFBBFE02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FE54EBF-271A-4A0D-94E5-C9E7A76DB113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FE54EBF-271A-4A0D-94E5-C9E7A76DB113}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FE54EBF-271A-4A0D-94E5-C9E7A76DB113}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FE54EBF-271A-4A0D-94E5-C9E7A76DB113}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E89E9BF-E15A-4C14-BF52-2CF83CF563E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E89E9BF-E15A-4C14-BF52-2CF83CF563E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E89E9BF-E15A-4C14-BF52-2CF83CF563E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E89E9BF-E15A-4C14-BF52-2CF83CF563E8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E374238E-914C-4ABC-BDCA-6DCF66A11903}
+	EndGlobalSection
+EndGlobal
