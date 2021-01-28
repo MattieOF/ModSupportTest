@@ -51,7 +51,8 @@ namespace MSTGame.Mods
                     {
                         IMod mod = (IMod) Activator.CreateInstance(type);
                         mods.Add(mod);
-                        assemblies.Add(assembly);
+                        if (!assemblies.Contains(assembly))
+                            assemblies.Add(assembly);
                     }
                 }
             }
