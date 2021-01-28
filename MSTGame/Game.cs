@@ -7,7 +7,7 @@ namespace MSTGame
     public class Game
     {
         public static string modsDir;
-        private static bool shouldClose = false;
+        private volatile static bool shouldClose = false;
 
         public Game(string modsDir)
         {
