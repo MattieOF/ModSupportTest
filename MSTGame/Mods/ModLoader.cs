@@ -55,6 +55,17 @@ namespace MSTGame.Mods
             }
         }
 
+        public static void SaveModBlacklist(string path = "mods/blacklist.txt")
+        {
+            StreamWriter writer = File.CreateText(path);
+            foreach (string modName in blacklistedMods)
+                writer.WriteLine(modName);
+
+            writer.Flush();
+            writer.Close();
+            writer.Dispose();
+        }
+
         public static void LoadMods(string modPath = "mods")
         {
             List<string> modNames = new List<string>();
