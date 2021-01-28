@@ -73,7 +73,7 @@ namespace MSTGame.Mods
             }
 
             if (modNames.Count != 0)
-                Log.Info($"Found mod files: {string.Join(", ", modNames)}");
+                Log.Info($"Found mod files: {string.Join(", ", modNames)}", "MODLOADER");
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace MSTGame.Mods
             {
                 if (blacklistedMods.Contains(mod.ModName))
                 {
-                    Log.Info($"Mod with name \"{mod.ModName}\" found in mod blocklist, not enabled and removed from mod list.");
+                    Log.Info($"Mod with name \"{mod.ModName}\" found in mod blocklist, not enabled and removed from mod list.", "MODLOADER");
                     modsToRemove.Add(mod);
                     continue;
                 }
@@ -133,7 +133,7 @@ namespace MSTGame.Mods
 
             if (blacklistedMods.Count != 0)
             {
-                Log.Info($"Loaded mod blocklist: {string.Join(", ", blacklistedMods)}");
+                Log.Info($"Loaded mod blocklist: {string.Join(", ", blacklistedMods)}", "MODLOADER");
             }
 
             stream.Close();
