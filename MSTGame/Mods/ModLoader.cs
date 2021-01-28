@@ -11,6 +11,31 @@ namespace MSTGame.Mods
         public static List<IMod> mods = new List<IMod>();
         public static List<string> blacklistedMods = new List<string>();
 
+        /// <summary>
+        /// Loads mods, loads the mods blocklist and enables mods (while skipping those in the blocklist)
+        /// </summary>
+        /// <param name="modsPath">Path to load mods from</param>
+        public static void InitLoaderAndMods(string modsPath)
+        {
+            LoadMods(modsPath);
+            LoadModBlacklist();
+            EnableMods();
+        }
+
+        /// <summary>
+        /// Disable all mods and save the mod blocklist
+        /// </summary>
+        public static void CloseLoaderAndMods()
+        {
+            DisableMods();
+            SaveModBlacklist();
+        }
+
+        /// <summary>
+        /// Check the path given for assembly files with one or more types that implement IMod. These types are also added to the static mods list
+        /// </summary>
+        /// <param name="path">The directory to check for mod files</param>
+        /// <returns>A list containing all assemblies that contain an IMod implementation</returns>
         public static List<Assembly> GetValidAssemblies(string path)
         {
             List<Assembly> assemblies = new List<Assembly>();
@@ -34,6 +59,10 @@ namespace MSTGame.Mods
             return assemblies;
         }
 
+        /// <summary>
+        /// Calls GetValidAssemblies with the provided path and also logs the mod files found
+        /// </summary>
+        /// <param name="modPath">Path to look for mods in</param>
         public static void LoadMods(string modPath = "mods")
         {
             List<string> modNames = new List<string>();
@@ -45,6 +74,10 @@ namespace MSTGame.Mods
             Log.Info($"Found mod files: {string.Join(", ", modNames)}");
         }
 
+        /// <summary>
+        /// Checks each mod agaisnt the mod blocklist (if found on the blocklist, it is skipped
+        /// and removed from the static mods list), and each mod has it's OnEnable function called
+        /// </summary>
         public static void EnableMods()
         {
             List<IMod> modsToRemove = new List<IMod>();
@@ -63,6 +96,9 @@ namespace MSTGame.Mods
             foreach (IMod mod in modsToRemove) mods.Remove(mod);
         }
 
+        /// <summary>
+        /// Calls the OnDisable mod on every loaded mod and clears the static mod list
+        /// </summary>
         public static void DisableMods()
         {
             foreach (IMod mod in mods)
@@ -73,6 +109,11 @@ namespace MSTGame.Mods
             mods.Clear();
         }
 
+        /// <summary> 
+        /// <para>Loads the mod blocklist from the given file and adds all entries to a string list</para>
+        /// <para>If the blocklist file doesn't exist, it is created</para>
+        /// </summary>
+        /// <param name="path">The file path for the blocklist txt</param>
         public static void LoadModBlacklist(string path = "mods/blocklist.txt")
         {
             if (!File.Exists(path))
@@ -90,10 +131,15 @@ namespace MSTGame.Mods
 
             if (blacklistedMods.Count != 0)
             {
-                Log.Info($"Loaded mod blacklist: {string.Join(", ", blacklistedMods)}");
+                Log.Info($"Loaded mod blocklist: {string.Join(", ", blacklistedMods)}");
             }
         }
 
+        /// <summary>
+        /// <para>Saves the blocklist to the given path</para>
+        /// <para>Format: each line is the modname for a blocklisted mod</para>
+        /// </summary>
+        /// <param name="path">Path to save the blocklist to</param>
         public static void SaveModBlacklist(string path = "mods/blocklist.txt")
         {
             StreamWriter writer = File.CreateText(path);
@@ -110,6 +156,10 @@ namespace MSTGame.Mods
             blacklistedMods.Add(modName);
         }
 
+        /// <summary>
+        /// Adds mod.ModName to the mod blocklist
+        /// </summary>
+        /// <param name="mod">Mod to add to the blocklist</param>
         public static void AddModToBlacklist(IMod mod)
         {
             blacklistedMods.Add(mod.ModName);

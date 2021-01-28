@@ -19,8 +19,7 @@ namespace MSTGame
             Log.InitLog();
             Log.Info("Initialising game!");
 
-            ModLoader.LoadMods(modsDir);
-            ModLoader.EnableMods();
+            ModLoader.InitLoaderAndMods(modsDir);
 
             while (!shouldClose)
             {
@@ -29,7 +28,7 @@ namespace MSTGame
                 shouldClose = true;
             }
 
-            ModLoader.DisableMods();
+            ModLoader.CloseLoaderAndMods();
             Log.DisposeMainLog();
         }
 
