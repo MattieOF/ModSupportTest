@@ -86,7 +86,7 @@ namespace MSTGame.Mods
             {
                 if (blacklistedMods.Contains(mod.ModName))
                 {
-                    Log.Info($"Mod with name {mod.ModName} found in mod blocklist, not enabled and removed from mod list.");
+                    Log.Info($"Mod with name \"{mod.ModName}\" found in mod blocklist, not enabled and removed from mod list.");
                     modsToRemove.Add(mod);
                     continue;
                 }
