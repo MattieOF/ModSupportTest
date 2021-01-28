@@ -72,7 +72,8 @@ namespace MSTGame.Mods
                 modNames.Add(assembly.Location);
             }
 
-            Log.Info($"Found mod files: {string.Join(", ", modNames)}");
+            if (modNames.Count != 0)
+                Log.Info($"Found mod files: {string.Join(", ", modNames)}");
         }
 
         /// <summary>
