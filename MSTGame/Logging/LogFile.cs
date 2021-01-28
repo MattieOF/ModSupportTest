@@ -35,8 +35,6 @@ namespace MSTGame.Logging
         public bool WriteLine(string message, bool flush = true)
         {
             if (writer == null) return false;
-            writer.WriteLine(message);
-            Console.WriteLine(message);
             if (flush) writer.Flush();
             return true;
         }

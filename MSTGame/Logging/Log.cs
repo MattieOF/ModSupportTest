@@ -2,7 +2,7 @@
 
 namespace MSTGame.Logging
 {
-    internal class Log
+    internal static class Log
     {
         public static LogFile mainLog;
 
@@ -24,13 +24,17 @@ namespace MSTGame.Logging
             if (level < ((file != null) ? file : mainLog).minLogLevel) return;
 
             DateTime now = DateTime.Now;
+            message = $"[{now:HH:mm:ss.FF} {source} {level}] {message}";
             if (file == null)
             {
-                mainLog.WriteLine($"[{now:HH:mm:ss.FF} {source} {level}] {message}");
+                mainLog.WriteLine(message);
             } else
             {
-                file.WriteLine($"[{now:HH:mm:ss.FF} {source} {level}] {message}");
+                file.WriteLine(message);
             }
+            LogUtil.SetConsoleColour(level);
+            Console.WriteLine(message);
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public static void Trace(string message, string source = "GAME", LogFile file = null)
