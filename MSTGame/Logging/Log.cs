@@ -23,10 +23,10 @@ namespace MSTGame.Logging
             DateTime now = DateTime.Now;
             if (file == null)
             {
-                mainLog.WriteLine($"[{now:HH:mm:ss.FFFFFFF} {source} {level}] {message}");
+                mainLog.WriteLine($"[{now:HH:mm:ss.FF} {source} {level}] {message}");
             } else
             {
-                file.WriteLine($"[{now:HH:mm:ss} {source} {level}] {message}");
+                file.WriteLine($"[{now:HH:mm:ss.FF} {source} {level}] {message}");
             }
         }
 
