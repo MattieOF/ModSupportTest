@@ -40,7 +40,11 @@ namespace MSTGame.Mods
         {
             List<Assembly> assemblies = new List<Assembly>();
 
-            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+                return assemblies;
+            }
 
             foreach (string dir in Directory.GetFiles(path, "*.dll"))
             {
