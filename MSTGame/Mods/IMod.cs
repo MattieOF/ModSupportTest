@@ -10,6 +10,11 @@ namespace MSTGame.Mods
         /// Name of the mod. Used for mod blocklists, console logging, etc
         /// </summary>
         string ModName { get; }
+        
+        /// <summary>
+        /// Other mods required by this mod
+        /// </summary>
+        string[] ModDeps { get; }
 
         /// <summary>
         /// Called when mods are enabled

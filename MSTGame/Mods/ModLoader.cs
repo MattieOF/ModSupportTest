@@ -12,6 +12,7 @@ namespace MSTGame.Mods
         public static List<IMod> mods = new List<IMod>();
         public static List<string> modNames = new List<string>();
         public static List<string> blacklistedMods = new List<string>();
+        public static Dictionary<string, List<string>> modDeps = new Dictionary<string, List<string>>();
 
         /// <summary>
         /// Loads mods, loads the mods blocklist and enables mods (while skipping those in the blocklist)

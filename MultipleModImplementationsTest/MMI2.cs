@@ -6,6 +6,8 @@ namespace MultipleModImplementationsTest
     {
         public string ModName => "Multiple Mod Implementations Test - Mod 2";
 
+        public string[] ModDeps => new string[] { };
+
         public bool OnDisable()
         {
             ModUtil.Info("Disabling MMI2");

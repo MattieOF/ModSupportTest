@@ -7,6 +7,8 @@ namespace TestMod
     {
         public string ModName => "TestMod";
 
+        public string[] ModDeps => new string[] { };
+
         public bool OnDisable()
         {
             ModUtil.Info("Disabling TestMod");
