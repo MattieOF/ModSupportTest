@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using MSTGame.Logging;
@@ -9,6 +10,7 @@ namespace MSTGame.Mods
     internal class ModLoader
     {
         public static List<IMod> mods = new List<IMod>();
+        public static List<string> modNames = new List<string>();
         public static List<string> blacklistedMods = new List<string>();
 
         /// <summary>
@@ -55,8 +57,9 @@ namespace MSTGame.Mods
                     {
                         IMod mod = (IMod) Activator.CreateInstance(type);
                         mods.Add(mod);
-                        if (!assemblies.Contains(assembly))
-                            assemblies.Add(assembly);
+                        if (assemblies.Contains(assembly)) Log.Warning($"Assembly {assembly.GetName().Name} has multiple mod implementations.\n" +
+                            $"This is fine, but ALL mod implementations will use the prefix [{assembly.GetName().Name}] for logging.", "MODLOADER");
+                        else assemblies.Add(assembly);
                     }
                 }
             }
@@ -96,6 +99,7 @@ namespace MSTGame.Mods
                     continue;
                 }
                 mod.OnEnable();
+                modNames.Add(mod.ModName);
                 // TODO Handle return false (failed init)
             }
 
@@ -112,7 +116,7 @@ namespace MSTGame.Mods
                 mod.OnDisable();
                 // TODO Handle return false (failed disable)
             }
-            mods.Clear();
+            ClearMods();
         }
 
         /// <summary> 
@@ -182,6 +186,12 @@ namespace MSTGame.Mods
         public static void RemoveModFromBlacklist(IMod mod)
         {
             blacklistedMods.Add(mod.ModName);
+        }
+
+        public static void ClearMods()
+        {
+            mods.Clear();
+            modNames.Clear();
         }
 
     }
